@@ -1,26 +1,34 @@
 #
-# SPDX-FileCopyrightText: The LineageOS Project
+# Copyright (C) 2026 The LineageOS Project
+#
 # SPDX-License-Identifier: Apache-2.0
 #
 
 # Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit from generic device
-$(call inherit-product, device/xiaomi/sea/device.mk)
-
-# Inherit some common Lineage stuff.
+# Inherit some common Lineage stuff
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
-PRODUCT_DEVICE := sea
+# Inherit from device makefile
+$(call inherit-product, device/xiaomi/sea/device.mk)
+
 PRODUCT_NAME := lineage_sea
+PRODUCT_DEVICE := sea
 PRODUCT_BRAND := Redmi
-PRODUCT_MODEL := sea
-PRODUCT_MANUFACTURER := xiaomi
+PRODUCT_MODEL := Redmi Note 12S
+PRODUCT_MANUFACTURER := Xiaomi
+
+PRODUCT_SYSTEM_NAME := sea_global
+PRODUCT_SYSTEM_DEVICE := sea
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BuildDesc="missi-user 15 AP3A.240905.015.A2 OS2.0.210.0.VHZMIXM release-keys" \
-    BuildFingerprint=Xiaomi/missi/missi:15/AP3A.240905.015.A2/OS2.0.210.0.VHZMIXM:user/release-keys
+    BuildDesc="sea_global-user 14 UP1A.230905.011 V816.0.16.0.UHZMIXM release-keys" \
+    BuildFingerprint=Redmi/sea_global/sea:14/UP1A.230905.011/V816.0.16.0.UHZMIXM:user/release-keys \
+    SystemModel=$(PRODUCT_SYSTEM_DEVICE) \
+    SystemName=$(PRODUCT_SYSTEM_NAME) \
+    ProductModel=$(PRODUCT_SYSTEM_DEVICE) \
+    DeviceProduct=$(PRODUCT_SYSTEM_NAME)
